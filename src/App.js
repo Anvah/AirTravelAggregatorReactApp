@@ -28,10 +28,10 @@ function App() {
         }
       });
       setTickets(response.data.result);
-      setError(null); // Очистить ошибку после успешного запроса
+      setError(null);
     } catch (error) {
       setError(error.response.data.error.message);
-      setTickets([]); // Очистить список билетов при ошибке
+      setTickets([]);
     }
   };
 
@@ -169,10 +169,3 @@ function App() {
 }
 
 export default App;
-
-
-
-
-
-
-
