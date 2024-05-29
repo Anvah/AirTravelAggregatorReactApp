@@ -23,9 +23,9 @@ function Login({ setJwtToken }) {
     <Container>
       <Typography variant="h5" gutterBottom>Login</Typography>
       <form onSubmit={handleLogin}>
-        <TextField name="username" label="Username" variant="outlined" margin="normal" fullWidth />
-        <TextField name="password" label="Password" type="password" variant="outlined" margin="normal" fullWidth />
-        <Button type="submit" variant="contained" color="primary" fullWidth>Login</Button>
+        <TextField name="username" label="Имя пользователя" variant="outlined" margin="normal" fullWidth />
+        <TextField name="password" label="Пароль" type="password" variant="outlined" margin="normal" fullWidth />
+        <Button type="submit" variant="contained" color="primary" fullWidth>Войти</Button>
       </form>
       {error && <Alert severity="error">{error}</Alert>}
     </Container>

@@ -25,9 +25,9 @@ function Register() {
     <Container>
       <Typography variant="h5" gutterBottom>Register</Typography>
       <form onSubmit={handleRegister}>
-        <TextField name="username" label="Username" variant="outlined" margin="normal" fullWidth />
-        <TextField name="password" label="Password" type="password" variant="outlined" margin="normal" fullWidth />
-        <Button type="submit" variant="contained" color="primary" fullWidth>Register</Button>
+        <TextField name="username" label="Имя пользователя" variant="outlined" margin="normal" fullWidth />
+        <TextField name="password" label="Проль" type="password" variant="outlined" margin="normal" fullWidth />
+        <Button type="submit" variant="contained" color="primary" fullWidth>Создать аккаунт</Button>
       </form>
       {error && <Alert severity="error">{error}</Alert>}
       {success && <Alert severity="success">{success}</Alert>}

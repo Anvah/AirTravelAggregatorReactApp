@@ -28,10 +28,10 @@ function App() {
         }
       });
       setTickets(response.data.result);
-      setError(null); // Очистить ошибку после успешного запроса
+      setError(null);
     } catch (error) {
-      setError(error.response.data.error.message);
-      setTickets([]); // Очистить список билетов при ошибке
+      setError("Билеты по вашему запросу не найдены");
+      setTickets([]);
     }
   };
 
@@ -42,10 +42,6 @@ function App() {
           Authorization: `Bearer ${jwtToken}`
         }
       });
-      if (response.data.error !== undefined) {
-        setError(response.data.error.message);
-        return;
-      }
       const updatedTickets = tickets.map(ticket => {
         if (ticket.originalId === ticketId) {
           return { ...ticket, isBooked: true };
@@ -53,9 +49,9 @@ function App() {
         return ticket;
       });
       setTickets(updatedTickets);
-      setSuccessMessage('Ticket booked successfully!');
+      setSuccessMessage('Билет успешно забронирован!');
     } catch (error) {
-      setError(error.message);
+      setError("При бронировании возникла ошибка");
     }
   };
 
@@ -87,7 +83,7 @@ function App() {
 
   return (
     <Container>
-      <Typography variant="h4" gutterBottom>Ticket Booking App</Typography>
+      <Typography variant="h4" gutterBottom>Агрегатор авиабилетов</Typography>
       {!isAuthenticated && (
         <Box display="flex" mb={2}>
           <Button onClick={() => { setShowLogin(true); setShowRegister(false); }} variant="contained" color="primary" style={{ marginRight: '10px' }}>Login</Button>
@@ -116,15 +112,15 @@ function App() {
               onChange={() => setOnlyNotBooked(!onlyNotBooked)}
             />
           }
-          label="Only Show Not Booked"
+          label="Показывать только свободные билеты"
         />
-        <TextField name="maxPrice" label="Max Price" type="number" variant="outlined" margin="normal" fullWidth />
+        <TextField name="maxPrice" label="Максимальная цена" type="number" variant="outlined" margin="normal" fullWidth />
         <Select name="sortByPrice" defaultValue="ByPrice" fullWidth variant="outlined" margin="normal">
-          <MenuItem value="ByPrice">Sort by Price</MenuItem>
-          <MenuItem value="ByTransfersCount">Sort by Transfers</MenuItem>
+          <MenuItem value="ByPrice">Сортировть по цене</MenuItem>
+          <MenuItem value="ByTransfersCount">Сортировть по количеству пересадок</MenuItem>
         </Select>
-        <TextField name="airlineName" label="Airline Name" variant="outlined" margin="normal" fullWidth />
-        <Button type="submit" variant="contained" color="primary" fullWidth>Search Tickets</Button>
+        <TextField name="airlineName" label="Название авиакомпании" variant="outlined" margin="normal" fullWidth />
+        <Button type="submit" variant="contained" color="primary" fullWidth>Найти билеты</Button>
       </form>
 
       {error && <Alert severity="error">{error}</Alert>}
@@ -141,10 +137,10 @@ function App() {
             <Card>
               <CardContent>
                 <Typography variant="h6">
-                  From {ticket.arrivalPoint.cityName} to {ticket.departurePoint.cityName}
+                  Из {ticket.arrivalPoint.airportName} в {ticket.departurePoint.airportName}
                 </Typography>
                 <Typography color="textSecondary">{ticket.airline.name}</Typography>
-                <Typography>Price: {ticket.price}</Typography>
+                <Typography>Цена: {ticket.price}</Typography>
                 <Typography>{ticket.isBooked ? "Забронирован" : "Не забронирован"}</Typography>
               </CardContent>
               <CardActions>
