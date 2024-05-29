@@ -23,7 +23,7 @@ function Register() {
 
   return (
     <Container>
-      <Typography variant="h5" gutterBottom>Register</Typography>
+      <Typography variant="h5" gutterBottom>Регистрация</Typography>
       <form onSubmit={handleRegister}>
         <TextField name="username" label="Имя пользователя" variant="outlined" margin="normal" fullWidth />
         <TextField name="password" label="Проль" type="password" variant="outlined" margin="normal" fullWidth />

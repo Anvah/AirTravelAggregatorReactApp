@@ -86,8 +86,8 @@ function App() {
       <Typography variant="h4" gutterBottom>Агрегатор авиабилетов</Typography>
       {!isAuthenticated && (
         <Box display="flex" mb={2}>
-          <Button onClick={() => { setShowLogin(true); setShowRegister(false); }} variant="contained" color="primary" style={{ marginRight: '10px' }}>Login</Button>
-          <Button onClick={() => { setShowRegister(true); setShowLogin(false); }} variant="contained" color="secondary">Register</Button>
+          <Button onClick={() => { setShowLogin(true); setShowRegister(false); }} variant="contained" color="primary" style={{ marginRight: '10px' }}>Войти</Button>
+          <Button onClick={() => { setShowRegister(true); setShowLogin(false); }} variant="contained" color="secondary">Зарегистрироваться</Button>
         </Box>
       )}
 
