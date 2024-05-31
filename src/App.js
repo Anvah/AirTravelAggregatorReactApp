@@ -15,15 +15,14 @@ function App() {
   const [dateError, setDateError] = useState('');
   const [onlyNotBooked, setOnlyNotBooked] = useState(false);
 
-  const fetchTickets = async (date, onlyNotBooked, maxPrice, sortByPrice, sortByTransfers, airlineName) => {
+  const fetchTickets = async (date, onlyNotBooked, maxPrice, sortProperty, airlineName) => {
     try {
       const response = await axios.get('http://localhost:5115/fligts/get', {
         params: {
           date,
           onlyNotBooked,
-          sortByPrice,
+          sortProperty,
           maxPrice,
-          sortByTransfers,
           airlineName
         }
       });
@@ -60,8 +59,7 @@ function App() {
     const formData = new FormData(event.target);
     const date = formData.get('date');
     const maxPrice = formData.get('maxPrice');
-    const sortByPrice = formData.get('sortByPrice') === 'ByPrice' ? 1 : 0;
-    const sortByTransfers = formData.get('sortByTransfers') === 'ByTransfersCount' ? 1 : 0;
+    const sortProperty = formData.get('sortProperty');
     const airlineName = formData.get('airlineName');
 
     if (!date) {
@@ -71,7 +69,7 @@ function App() {
       setDateError('');
     }
 
-    fetchTickets(date, onlyNotBooked, maxPrice, sortByPrice, sortByTransfers, airlineName);
+    fetchTickets(date, onlyNotBooked, maxPrice, sortProperty, airlineName);
   };
 
   const handleLogin = (token) => {
@@ -115,9 +113,9 @@ function App() {
           label="Показывать только свободные билеты"
         />
         <TextField name="maxPrice" label="Максимальная цена" type="number" variant="outlined" margin="normal" fullWidth />
-        <Select name="sortByPrice" defaultValue="ByPrice" fullWidth variant="outlined" margin="normal">
-          <MenuItem value="ByPrice">Сортировть по цене</MenuItem>
-          <MenuItem value="ByTransfersCount">Сортировть по количеству пересадок</MenuItem>
+        <Select name="sortProperty" defaultValue="ByPrice" fullWidth variant="outlined" margin="normal">
+          <MenuItem value="ByPrice">Сортировать по цене</MenuItem>
+          <MenuItem value="ByTransfersCount">Сортировать по количеству пересадок</MenuItem>
         </Select>
         <TextField name="airlineName" label="Название авиакомпании" variant="outlined" margin="normal" fullWidth />
         <Button type="submit" variant="contained" color="primary" fullWidth>Найти билеты</Button>
@@ -165,3 +163,4 @@ function App() {
 }
 
 export default App;
+
