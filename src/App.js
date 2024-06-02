@@ -34,9 +34,9 @@ function App() {
     }
   };
 
-  const bookTicket = async (ticketId, sourse) => {
+  const bookTicket = async (ticketId, source) => {
     try {
-      const response = await axios.post(`http://localhost:5115/fligts/book/${ticketId}/${sourse}`, {}, {
+      const response = await axios.post(`http://localhost:5115/fligts/book/${ticketId}/${source}`, {}, {
         headers: {
           Authorization: `Bearer ${jwtToken}`
         }
@@ -144,7 +144,7 @@ function App() {
               <CardActions>
                 {isAuthenticated && (
                   <Button
-                    onClick={() => bookTicket(ticket.originalId, ticket.sourse)}
+                    onClick={() => bookTicket(ticket.originalId, ticket.source)}
                     disabled={ticket.isBooked}
                     variant="contained"
                     color="primary"
